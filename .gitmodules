@@ -19,3 +19,6 @@
 [submodule "submodules/bfc"]
 	path = submodules/bfc
 	url = git://github.com/lh3/bfc.git
+[submodule "submodules/rocksdb"]
+	path = submodules/rocksdb
+	url = git://github.com/facebook/rocksdb.git
