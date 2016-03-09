@@ -10,3 +10,9 @@
 [submodule "submodules/protobuf"]
 	path = submodules/protobuf
 	url = git://github.com/google/protobuf.git
+[submodule "submodules/bamtools"]
+	path = submodules/bamtools
+	url = git://github.com/pezmaster31/bamtools.git
+[submodule "submodules/google-sparsehash"]
+	path = submodules/google-sparsehash
+	url = git://github.com/justinsb/google-sparsehash.git
