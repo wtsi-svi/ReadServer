@@ -1,3 +1,9 @@
 [submodule "submodules/sga"]
 	path = submodules/sga
 	url = git://github.com/jts/sga.git
+[submodule "submodules/libzmq"]
+	path = submodules/libzmq
+	url = git://github.com/zeromq/libzmq.git
+[submodule "submodules/cppzmq"]
+	path = submodules/cppzmq
+	url = git://github.com/zeromq/cppzmq.git
