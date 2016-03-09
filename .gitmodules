@@ -1,0 +1,3 @@
+[submodule "submodules/sga"]
+	path = submodules/sga
+	url = git://github.com/jts/sga.git
