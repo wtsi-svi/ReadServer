@@ -22,3 +22,6 @@
 [submodule "submodules/rocksdb"]
 	path = submodules/rocksdb
 	url = git://github.com/facebook/rocksdb.git
+[submodule "submodules/mongoose"]
+	path = submodules/mongoose
+	url = git://github.com/cesanta/mongoose.git
