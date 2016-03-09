@@ -16,3 +16,6 @@
 [submodule "submodules/google-sparsehash"]
 	path = submodules/google-sparsehash
 	url = git://github.com/justinsb/google-sparsehash.git
+[submodule "submodules/bfc"]
+	path = submodules/bfc
+	url = git://github.com/lh3/bfc.git
