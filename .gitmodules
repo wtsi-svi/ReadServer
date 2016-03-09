@@ -7,3 +7,6 @@
 [submodule "submodules/cppzmq"]
 	path = submodules/cppzmq
 	url = git://github.com/zeromq/cppzmq.git
+[submodule "submodules/protobuf"]
+	path = submodules/protobuf
+	url = git://github.com/google/protobuf.git
