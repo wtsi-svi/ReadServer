@@ -1,5 +1,5 @@
-#ifndef BPTREE_H
-#define BPTREE_H
+#ifndef RS_BPTREE_H
+#define RS_BPTREE_H
 
 #include <vector>
 #include <memory>
