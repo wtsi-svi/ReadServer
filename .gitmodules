@@ -25,3 +25,4 @@
 [submodule "submodules/mongoose"]
 	path = submodules/mongoose
 	url = git://github.com/Zhicheng-Liu/mongoose.git
+    branch = readserver
