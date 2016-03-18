@@ -24,4 +24,4 @@
 	url = git://github.com/facebook/rocksdb.git
 [submodule "submodules/mongoose"]
 	path = submodules/mongoose
-	url = git://github.com/cesanta/mongoose.git
+	url = git://github.com/Zhicheng-Liu/mongoose.git
