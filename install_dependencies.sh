@@ -81,6 +81,7 @@ then
     init_submodules
     cd submodules/mongoose # ReadServer/submodules/mongoose
 fi
+git checkout readserver
 cd .. # ReadServer/submodules
 
 cd protobuf # ReadServer/submodules/protobuf
