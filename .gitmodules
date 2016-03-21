@@ -26,3 +26,6 @@
 	path = submodules/mongoose
 	url = git://github.com/wtsi-svi/mongoose.git
 	branch = readserver
+[submodule "submodules/libconfig"]
+	path = submodules/libconfig
+	url = https://github.com/hyperrealm/libconfig
