@@ -65,6 +65,15 @@ fi
 ./configure --prefix=$LIB_DIR && make && make install
 cd .. # ReadServer/submodules 
 
+cd libconfig # ReadServer/submodules/libconfig
+if [ ! -d lib ]
+then
+    init_submodules
+    cd submodules/libconfig # ReadServer/submodules/libconfig
+fi
+./configure --prefix=$LIB_DIR && make && make install
+cd .. # ReadServer/submodules 
+
 cd libzmq # ReadServer/submodules/libzmq
 if [ ! -d src ]
 then
