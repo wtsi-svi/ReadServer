@@ -35,8 +35,37 @@ template< typename IntType >
 class BPNodes : public IBPNodes {
  public:
 
-  BPNodes ( const size_t& l, const size_t& bucket, const size_t& block );
-  BPNodes ( std::istream& is );
+  BPNodes ( const size_t& l, const size_t& bucket, const size_t& block )
+    : m_length(0),
+      m_block_size(block),
+      m_bucket_size(bucket) {
+    m_array.reset(new std::vector< AlphaCount<IntType> >);
+    m_array->clear();
+    m_array->reserve(l);
+
+    m_sum.reset(new std::vector< IntType >);
+    m_sum->clear();
+    m_sum->reserve(l);
+  }
+
+  BPNodes ( std::istream& is )
+    : m_length(0),
+      m_block_size(0),
+      m_bucket_size(0) {
+    is.read((char*)&m_length, sizeof(m_length));
+    is.read((char*)&m_block_size, sizeof(m_block_size));
+    is.read((char*)&m_bucket_size, sizeof(m_bucket_size));
+
+    m_array.reset(new std::vector< AlphaCount<IntType> >);
+    m_array->clear();
+    m_array->resize(m_length);
+    is.read((char*)(&(*(m_array->data()))), m_length * sizeof(AlphaCount<IntType>) );
+
+    m_sum.reset(new std::vector< IntType >);
+    m_sum->clear();
+    m_sum->resize(m_length);
+    is.read((char*)(m_sum->data()), m_length * sizeof(IntType) );
+  }
 
   inline size_t getLength() const {
     return m_length;
