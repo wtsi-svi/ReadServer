@@ -24,4 +24,4 @@ clean:
 	$(RM) $(INSTALL_DIR)/$(TARGET)
 
 install:
-	mv $(TARGET) $(INSTALL_DIR)
+	cp $(TARGET) $(INSTALL_DIR)

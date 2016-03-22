@@ -1,0 +1,62 @@
+message Request {
+    enum RequestType { CountReads = 1; ExactMatch = 2; KmerMatch = 3; SiteMatch = 4; }
+    enum ReturnType { Count = 1; Reads = 2; All = 3; Samples = 4; }
+    required RequestType t = 1;
+    required ReturnType rt = 2;
+    required string q = 3;
+    optional int32 k = 4;
+    optional int32 s = 5;
+    optional int32 p = 6;
+    optional string a = 7;
+    optional int32 isalt = 8;
+}
+
+message ReadInfo {
+    required string g = 1;
+    required int32 c = 2;
+    required int32 l = 3;
+}
+
+message ResultSamples {
+    repeated ReadInfo s = 1;
+}
+
+message ResultAll {
+    required string r = 1;
+    repeated ReadInfo s = 2;
+}
+
+message ResultCount {
+    required int32 c = 1;
+}
+
+message ResultReads {
+    required string r = 1;
+}
+
+message Reply {
+    enum RequestType { CountReads = 1; ExactMatch = 2; KmerMatch = 3; SiteMatch = 4; }
+    enum ReplyType { ReplyCount = 1; ReplyReads = 2; ReplyAll = 3; ResultSamples = 4; }
+    required RequestType rt = 1;
+    required ReplyType t = 2;
+    required string q = 3;
+    optional ReplyCount c = 4;
+    optional ReplyReads r = 5;
+    optional ReplyAll a = 6;
+    optional ResultSamples s = 7;
+}
+
+message ReplyAll {
+    repeated ResultAll forward_matches = 1;
+    repeated ResultAll revcomp_matches = 2;
+}
+
+message ReplyCount {
+    optional ResultCount forward_matches = 1;
+    optional ResultCount revcomp_matches = 2;
+}
+
+message ReplyReads {
+    repeated ResultReads forward_matches = 1;
+    repeated ResultReads revcomp_matches = 2;
+}

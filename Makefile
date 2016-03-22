@@ -1,17 +1,21 @@
-SUBDIRS = src/bwt
-
 LIBBWT_CODE = src/bwt
 
-.PHONY: all clean install libbwt
+SERVICE_CODE = src/service
 
-all: $(SUBDIRS)
-	$(MAKE) -C $(SUBDIRS)
+.PHONY: all clean install libbwt service
 
-clean: $(SUBDIRS)
-	$(MAKE) -C $(SUBDIRS) clean
+all:
+	$(MAKE) -C $(LIBBWT_CODE)
+	$(MAKE) -C $(LIBBWT_CODE) install
+	$(MAKE) -C $(SERVICE_CODE)
 
-install: $(SUBDIRS)
-	$(MAKE) -C $(SUBDIRS) install
+clean:
+	$(MAKE) -C $(LIBBWT_CODE) clean
+	$(MAKE) -C $(SERVICE_CODE) clean
+
+install:
+	$(MAKE) -C $(LIBBWT_CODE) install
+	$(MAKE) -C $(SERVICE_CODE) install
 
 libbwt:
 	$(MAKE) -C $(LIBBWT_CODE)
