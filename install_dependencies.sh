@@ -112,6 +112,7 @@ then
     cd submodules/rocksdb # ReadServer/submodules/rocksdb
 fi
 make shared_lib
+mv librocksdb.so* ../../libs/lib
 cd .. # ReadServer/submodules 
 
 cd sga # ReadServer/submodules/sga
