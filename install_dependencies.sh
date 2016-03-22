@@ -71,6 +71,8 @@ then
     init_submodules
     cd submodules/libconfig # ReadServer/submodules/libconfig
 fi
+aclocal
+automake --add-missing
 ./configure --prefix=$LIB_DIR && make && make install
 cd .. # ReadServer/submodules 
 
