@@ -11,6 +11,12 @@ init_submodules () {
 if [ ! -d libs ]
 then
     mkdir libs # create ReadServer/libs/
+    cd libs
+    mkdir include
+    mkdir lib
+    mkdir bin
+    mkdir share
+    cd ..
 fi
 
 cd libs # ReadServer/libs/
@@ -54,6 +60,7 @@ then
     init_submodules
     cd submodules/cppzmq # ReadServer/submodules/cppzmq
 fi
+cp zmq.hpp ../../libs/include/
 cd .. # ReadServer/submodules
 
 cd google-sparsehash # ReadServer/submodules/google-sparsehash
