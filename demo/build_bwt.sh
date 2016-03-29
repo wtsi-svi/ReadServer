@@ -6,6 +6,8 @@ RUN_DIR=`pwd`
 
 SOURCE_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SOURCE_DIR/../libs/lib
+
 if [ ! -e "$SOURCE_DIR/ng.3281-S2.csv" ] 
 then
     echo "File ng.3281-S2.csv does not exist."
@@ -106,10 +108,10 @@ cd ..
 
 # Index the bwt file built as above
 cd bwt
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SOURCE_DIR/../libs/lib $SOURCE_DIR/../libs/bin/index_rlebwt final.bwt
+$SOURCE_DIR/../libs/bin/index_rlebwt final.bwt
 cd ..
 
 # Load the reads (key) and ids (value) into RocksDB
 rm -rf rocksdb
 mkdir rocksdb
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SOURCE_DIR/../libs/lib $SOURCE_DIR/../libs/bin/load_data_into_rocksdb fastq/merged.rlosorted.reads rocksdb
+$SOURCE_DIR/../libs/bin/load_data_into_rocksdb fastq/merged.rlosorted.reads rocksdb
