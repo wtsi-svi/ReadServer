@@ -28,7 +28,7 @@ BAMTOOLS_DIR=`pwd`
 cd ../ # ReadServer/submodules/
 
 #
-# bamtools  bfc  cppzmq  google-sparsehash  libzmq  mongoose  protobuf  rocksdb  sga
+# bamtools  bfc  cppzmq  google-sparsehash libconfig  libzmq  mongoose  protobuf  rocksdb  sga
 #
 
 cd bamtools # ReadServer/submodules/bamtools
@@ -109,7 +109,7 @@ then
     cd submodules/protobuf # ReadServer/submodules/protobuf
 fi
 ./autogen.sh
-./configure --prefix=$LIB_DIR && make && make check && make install
+./configure --prefix=$LIB_DIR && make && make install
 cd .. # ReadServer/submodules 
 
 cd rocksdb # ReadServer/submodules/rocksdb

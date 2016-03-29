@@ -1,6 +1,7 @@
 #ifndef RS_ALPHABET_H
 #define RS_ALPHABET_H
 
+#include <fstream>
 #include <stdint.h>
 #include <string.h>
 
