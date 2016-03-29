@@ -56,6 +56,9 @@ using namespace libconfig;
 #define MAX_READ_LENGTH 100
 #define MIN_READ_LENGTH 73
 
+size_t sizeofSample = 2;
+bool hasOtherMetaData = true;
+
 unsigned char seq_nt4_table[256] = {
 	4, 4, 4, 4,  4, 4, 4, 4,  4, 4, 4, 4,  4, 4, 4, 4, 
 	4, 4, 4, 4,  4, 4, 4, 4,  4, 4, 4, 4,  4, 4, 4, 4, 
@@ -823,12 +826,18 @@ public:
         size_t pos = 0;
         while(pos < value.size()) {
           ReadInfo* info = (*result)->add_s();
-          info->set_g((*hash)[value.substr(pos,2)]);
-          pos += 2;
-          info->set_c((int)(value[pos])-33);
-          ++pos;
-          info->set_l((int)(value[pos])-33);
-          ++pos;
+          info->set_g((*hash)[value.substr(pos,sizeofSample)]);
+          pos += sizeofSample;
+          if ( hasOtherMetaData ) {
+            info->set_c((int)(value[pos])-33);
+            ++pos;
+            info->set_l((int)(value[pos])-33);
+            ++pos;
+          }
+          else {
+            info->set_c(0);
+            info->set_l(0);
+          }
         }
       }
     }
@@ -949,12 +958,18 @@ public:
           size_t pos = 0;
           while(pos < value.size()) {
             ReadInfo* info = (*result)->add_s();
-            info->set_g((*hash)[value.substr(pos,2)]);
-            pos += 2;
-            info->set_c((int)(value[pos])-33);
-            ++pos;
-            info->set_l((int)(value[pos])-33);
-            ++pos;
+            info->set_g((*hash)[value.substr(pos,sizeofSample)]);
+            pos += sizeofSample;
+            if ( hasOtherMetaData ) {
+              info->set_c((int)(value[pos])-33);
+              ++pos;
+              info->set_l((int)(value[pos])-33);
+              ++pos;
+            }
+            else {
+              info->set_c(0);
+              info->set_l(0);
+            }
           }
         }
 
@@ -1164,12 +1179,18 @@ public:
           size_t pos = 0;
           while(pos < value.size()) {
             ReadInfo* info = (*result)->add_s();
-            info->set_g((*hash)[value.substr(pos,2)]);
-            pos += 2;
-            info->set_c((int)(value[pos])-33);
-            ++pos;
-            info->set_l((int)(value[pos])-33);
-            ++pos;
+            info->set_g((*hash)[value.substr(pos,sizeofSample)]);
+            pos += sizeofSample;
+            if ( hasOtherMetaData ) {
+              info->set_c((int)(value[pos])-33);
+              ++pos;
+              info->set_l((int)(value[pos])-33);
+              ++pos;
+            }
+            else {
+              info->set_c(0);
+              info->set_l(0);
+            }
           }
         }
 
@@ -1312,12 +1333,18 @@ public:
           size_t pos = 0;
           while(pos < value.size()) {
             ReadInfo* info = (*result)->add_s();
-            info->set_g((*hash)[value.substr(pos,2)]);
-            pos += 2;
-            info->set_c((int)(value[pos])-33);
-            ++pos;
-            info->set_l((int)(value[pos])-33);
-            ++pos;
+            info->set_g((*hash)[value.substr(pos,sizeofSample)]);
+            pos += sizeofSample;
+            if ( hasOtherMetaData ) {
+              info->set_c((int)(value[pos])-33);
+              ++pos;
+              info->set_l((int)(value[pos])-33);
+              ++pos;
+            }
+            else {
+              info->set_c(0);
+              info->set_l(0);
+            }
           }
         }
 
@@ -1380,6 +1407,13 @@ int main (int argc, char **argv) {
   vector<string> rocksdbs;
   try
   {
+    if ( cfg.exists("sizeofSample") ) {
+      sizeofSample = (int)cfg.lookup("sizeofSample");
+    }
+    if ( cfg.exists("hasOtherMetaData") ) {
+      hasOtherMetaData = (bool)cfg.lookup("hasOtherMetaData");
+    }
+
     prefix = cfg.lookup("prefix").c_str();
     suffix = cfg.lookup("suffix").c_str();
     hashfile = cfg.lookup("hashfile").c_str();

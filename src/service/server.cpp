@@ -136,10 +136,6 @@ map<string, shared_ptr<Response> > countread_responses;
 map<string, shared_ptr<Response> > completed_responses;
 map<string, shared_ptr<Response> > completed_requests;
 
-
-//map<string, pair<shared_ptr<string>, shared_ptr<vector<shared_ptr<Reply> > > > > responses;
-//map<string, pair<size_t, bool> > results;
-
 void readinfo2json ( string& dst, const ReadInfo& ri ) {
   dst.append("{\"g\":\"");
   dst.append(ri.g());

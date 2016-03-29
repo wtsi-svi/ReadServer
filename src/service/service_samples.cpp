@@ -21,6 +21,9 @@ using namespace libconfig;
 
 const size_t query_thread_size = 32;
 
+size_t sizeofSample = 2;
+bool hasOtherMetaData = true;
+
 std::mutex mtx;
 
 class ReopenDbTask : public ThreadPool::Job {
@@ -98,12 +101,18 @@ public:
     size_t pos = 0;
     while(pos < value.size()) {
       ReadInfo* info = result->add_s();
-      info->set_g((*hash)[value.substr(pos,2)]);
-      pos += 2;
-      info->set_c((int)(value[pos])-33);
-      ++pos;
-      info->set_l((int)(value[pos])-33);
-      ++pos;
+      info->set_g((*hash)[value.substr(pos,sizeofSample)]);
+      pos += sizeofSample;
+      if ( hasOtherMetaData ) {
+        info->set_c((int)(value[pos])-33);
+        ++pos;
+        info->set_l((int)(value[pos])-33);
+        ++pos;
+      }
+      else {
+        info->set_c(0);
+        info->set_l(0);
+      }
     }
 
     //  Send results to sink
@@ -154,6 +163,13 @@ int main (int argc, char **argv) {
   vector<string> rocksdbs;
   try
   {
+    if ( cfg.exists("sizeofSample") ) {
+      sizeofSample = (int)cfg.lookup("sizeofSample");
+    }
+    if ( cfg.exists("hasOtherMetaData") ) {
+      hasOtherMetaData = (bool)cfg.lookup("hasOtherMetaData");
+    }
+
     hashfile = cfg.lookup("hashfile").c_str();
     pull_socket = cfg.lookup("pull").c_str();
     push_socket = cfg.lookup("push").c_str();
