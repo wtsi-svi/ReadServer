@@ -118,6 +118,8 @@ then
     init_submodules
     cd submodules/rocksdb # ReadServer/submodules/rocksdb
 fi
+make static_lib
+mv librocksdb.a ../../libs/lib
 make shared_lib
 mv librocksdb.so* ../../libs/lib
 cd .. # ReadServer/submodules 

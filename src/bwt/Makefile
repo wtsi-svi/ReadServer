@@ -2,22 +2,20 @@ CXX = g++
 
 CXXFLAGS = -Wall -Wextra -std=c++11 -fPIC -I../../include/bwt
 
-LDFLAGS = -shared
+ARFLAGS = rvs
 
 SOURCES = $(shell echo *.cpp)
 
 OBJECTS = $(SOURCES:.cpp=.o)
 
-TARGET = libbwt.so
+TARGET = libbwt.a
 
 INSTALL_DIR = ../../libs/lib
 
 .PHONY: all clean install
 
-all: $(TARGET)
-
-$(TARGET): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJECTS) $(LDFLAGS)
+all: $(OBJECTS)
+	$(AR) $(ARFLAGS) $(TARGET) $(OBJECTS)
 
 clean:
 	$(RM) $(TARGET) $(OBJECTS)

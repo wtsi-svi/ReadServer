@@ -2,12 +2,12 @@ CXX = g++
 
 CXXFLAGS = -Wall -Wextra -std=c++11
 
-LINK_LIBRARY = -L../../libs/lib
+LDLIBS = ../../libs/lib/libzmq.a -lrt ../../libs/lib/libconfig++.a ../../libs/lib/libprotobuf.a
 
 
 SERVICE_INCLUDE_DIR = -I../../include/service -I../../libs/include -I../../include/bwt -I../../submodules/rocksdb/include
 
-SERVICE_LDFLAGS = -lzmq -lconfig++ -lprotobuf -lbwt -lrocksdb -lpthread -lz -lbz2
+SERVICE_LDFLAGS = ../../libs/lib/libbwt.a ../../libs/lib/librocksdb.a -lpthread -lz -lbz2
 
 SERVICE_SOURCES = readserver.pb.cc ksw.c service.cpp
 
@@ -16,7 +16,7 @@ SERVICE_TARGET = service
 
 SERVICE_SAMPLES_INCLUDE_DIR = -I../../include/service -I../../libs/include -I../../submodules/rocksdb/include
 
-SERVICE_SAMPLES_LDFLAGS = -lzmq -lconfig++ -lprotobuf -lrocksdb -lpthread -lz -lbz2
+SERVICE_SAMPLES_LDFLAGS = ../../libs/lib/librocksdb.a -lpthread -lz -lbz2
 
 SERVICE_SAMPLES_SOURCES = readserver.pb.cc service_samples.cpp
 
@@ -25,7 +25,7 @@ SERVICE_SAMPLES_TARGET = service_samples
 
 SERVER_INCLUDE_DIR = -I../../include/service -I../../libs/include -I../../submodules/mongoose
 
-SERVER_LDFLAGS = -lzmq -lconfig++ -lprotobuf -lpthread
+SERVER_LDFLAGS = -lpthread
 
 SERVER_SOURCES = readserver.pb.cc ../../submodules/mongoose/mongoose.c server.cpp
 
@@ -39,13 +39,13 @@ INSTALL_DIR = ../../libs/bin
 all: $(SERVICE_TARGET) $(SERVER_TARGET) $(SERVICE_SAMPLES_TARGET)
 
 $(SERVICE_TARGET):
-	$(CXX) $(CXXFLAGS) $(SERVICE_INCLUDE_DIR) -o $(SERVICE_TARGET) $(SERVICE_SOURCES) $(LINK_LIBRARY) $(SERVICE_LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(SERVICE_INCLUDE_DIR) -o $(SERVICE_TARGET) $(SERVICE_SOURCES) $(LDLIBS) $(SERVICE_LDFLAGS)
 
 $(SERVER_TARGET):
-	$(CXX) $(CXXFLAGS) $(SERVER_INCLUDE_DIR) -o $(SERVER_TARGET) $(SERVER_SOURCES) $(LINK_LIBRARY) $(SERVER_LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(SERVER_INCLUDE_DIR) -o $(SERVER_TARGET) $(SERVER_SOURCES) $(LDLIBS) $(SERVER_LDFLAGS)
 
 $(SERVICE_SAMPLES_TARGET):
-	$(CXX) $(CXXFLAGS) $(SERVICE_SAMPLES_INCLUDE_DIR) -o $(SERVICE_SAMPLES_TARGET) $(SERVICE_SAMPLES_SOURCES) $(LINK_LIBRARY) $(SERVICE_SAMPLES_LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(SERVICE_SAMPLES_INCLUDE_DIR) -o $(SERVICE_SAMPLES_TARGET) $(SERVICE_SAMPLES_SOURCES) $(LDLIBS) $(SERVICE_SAMPLES_LDFLAGS)
 
 clean:
 	$(RM) $(SERVICE_TARGET)
