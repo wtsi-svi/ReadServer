@@ -781,7 +781,7 @@ vector<string> find_reads ( BWT* pBWT, const string& w, const string& s ) {
       }
     }
 
-    {
+    if ( MIN_READ_LENGTH != MAX_READ_LENGTH ) {
       // find matches for each tiles with length 73
       const unordered_set<string>& vs = get_tiles(w, MIN_READ_LENGTH);
       for ( unordered_set<string>::const_iterator it=vs.begin(); it!=vs.end(); ++it ) {
