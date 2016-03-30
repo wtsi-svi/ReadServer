@@ -16,8 +16,8 @@
 using namespace std;
 using namespace libconfig;
 
-#define MAX_READ_LENGTH 100
-#define MIN_READ_LENGTH 73
+size_t MAX_READ_LENGTH = 100;
+size_t MIN_READ_LENGTH  = 73;
 
 const size_t query_thread_size = 32;
 
@@ -168,6 +168,12 @@ int main (int argc, char **argv) {
     }
     if ( cfg.exists("hasOtherMetaData") ) {
       hasOtherMetaData = (bool)cfg.lookup("hasOtherMetaData");
+    }
+    if ( cfg.exists("max_read_length") ) {
+      MAX_READ_LENGTH = (int)cfg.lookup("max_read_length");
+    }
+    if ( cfg.exists("min_read_length") ) {
+      MIN_READ_LENGTH = (int)cfg.lookup("min_read_length");
     }
 
     hashfile = cfg.lookup("hashfile").c_str();

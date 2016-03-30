@@ -28,6 +28,8 @@ using namespace std;
 using namespace libconfig;
 
 size_t workers_count = 32;
+size_t MAX_READ_LENGTH = 100;
+size_t MIN_READ_LENGTH = 73;
 
 class Response {
 public:
@@ -553,9 +555,9 @@ int handle_get ( struct mg_connection *conn ) {
   }
 
   if ( output == "samples" ) {
-    if ( query.size() != 100 && query.size() != 73 ) {
+    if ( query.size() != MAX_READ_LENGTH && query.size() != MIN_READ_LENGTH ) {
       mg_send_status(conn, 400);
-      mg_printf_data(conn, "Bad Request: query is not of length 73 or 100.");
+      mg_printf_data(conn, string("Bad Request: query is not of length " + MIN_READ_LENGTH).append(" or " + MAX_READ_LENGTH).append(".").c_str());
       return MG_TRUE;
     }
   }
@@ -912,6 +914,13 @@ int main ( int argc, char **argv ) {
   string workers;
   
   try {
+    if ( cfg.exists("max_read_length") ) {
+      MAX_READ_LENGTH = (int)cfg.lookup("max_read_length");
+    }
+    if ( cfg.exists("min_read_length") ) {
+      MIN_READ_LENGTH = (int)cfg.lookup("min_read_length");
+    }
+
     port = cfg.lookup("port").c_str();
     pull_socket_count = cfg.lookup("pull_socket_count").c_str();
     pull_socket = cfg.lookup("pull_socket").c_str();

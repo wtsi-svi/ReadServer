@@ -53,8 +53,8 @@ void handler(int sig) {
 using namespace std;
 using namespace libconfig;
 
-#define MAX_READ_LENGTH 100
-#define MIN_READ_LENGTH 73
+size_t MAX_READ_LENGTH = 100;
+size_t MIN_READ_LENGTH = 73;
 
 size_t sizeofSample = 2;
 bool hasOtherMetaData = true;
@@ -226,7 +226,7 @@ bool align_gt_read ( const string& read, const string& target, const size_t pos,
 
 // if w ends with s.
 inline bool is_suffix_of ( const string& s, const string& w ) {
-  return w.size() >= s.size() && equal(s.rbegin(), s.rend(), w.rbegin());
+  return s == "" || ( w.size() >= s.size() && equal(s.rbegin(), s.rend(), w.rbegin()) );
 }
 
 unordered_set<string> get_tiles ( const string& w, const size_t& kmer, const size_t& skip ) {
@@ -1412,6 +1412,12 @@ int main (int argc, char **argv) {
     }
     if ( cfg.exists("hasOtherMetaData") ) {
       hasOtherMetaData = (bool)cfg.lookup("hasOtherMetaData");
+    }
+    if ( cfg.exists("max_read_length") ) {
+      MAX_READ_LENGTH = (int)cfg.lookup("max_read_length");
+    }
+    if ( cfg.exists("min_read_length") ) {
+      MIN_READ_LENGTH = (int)cfg.lookup("min_read_length");
     }
 
     prefix = cfg.lookup("prefix").c_str();
