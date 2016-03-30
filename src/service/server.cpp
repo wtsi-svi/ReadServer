@@ -914,10 +914,11 @@ int main ( int argc, char **argv ) {
   string workers;
   
   try {
-    if ( cfg.exists("max_read_length") ) {
+    const Setting& rs = cfg.getRoot();
+    if ( rs.exists("max_read_length") ) {
       MAX_READ_LENGTH = atoi(cfg.lookup("max_read_length").c_str());
     }
-    if ( cfg.exists("min_read_length") ) {
+    if ( rs.exists("min_read_length") ) {
       MIN_READ_LENGTH = atoi(cfg.lookup("min_read_length").c_str());
     }
 

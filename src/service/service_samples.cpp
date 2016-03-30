@@ -165,16 +165,17 @@ int main (int argc, char **argv) {
   vector<string> rocksdbs;
   try
   {
-    if ( cfg.exists("sizeofSample") ) {
-      sizeofSample = atoi(cfg.lookup("sizeofSample").c_str());
+    const Setting& rs = cfg.getRoot();
+    if ( rs.exists("size_of_sample") ) {
+      sizeofSample = atoi(cfg.lookup("size_of_sample").c_str());
     }
-    if ( cfg.exists("hasOtherMetaData") ) {
-      hasOtherMetaData = (string(cfg.lookup("hasOtherMetaData").c_str()) == "1");
+    if ( rs.exists("has_other_meta_data") ) {
+      hasOtherMetaData = (string(cfg.lookup("has_other_meta_data").c_str()) == "1");
     }
-    if ( cfg.exists("max_read_length") ) {
+    if ( rs.exists("max_read_length") ) {
       MAX_READ_LENGTH = atoi(cfg.lookup("max_read_length").c_str());
     }
-    if ( cfg.exists("min_read_length") ) {
+    if ( rs.exists("min_read_length") ) {
       MIN_READ_LENGTH = atoi(cfg.lookup("min_read_length").c_str());
     }
 
@@ -197,7 +198,7 @@ int main (int argc, char **argv) {
   }
   catch(const SettingNotFoundException &nfex)
   {
-    cerr << "No 'name' setting in configuration file." << endl;
+    cerr << string(nfex.what()) << ": " << string(nfex.getPath()) << endl;
     return EXIT_FAILURE;
   }
 
