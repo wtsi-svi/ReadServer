@@ -915,10 +915,10 @@ int main ( int argc, char **argv ) {
   
   try {
     if ( cfg.exists("max_read_length") ) {
-      MAX_READ_LENGTH = (int)cfg.lookup("max_read_length");
+      MAX_READ_LENGTH = atoi(cfg.lookup("max_read_length").c_str());
     }
     if ( cfg.exists("min_read_length") ) {
-      MIN_READ_LENGTH = (int)cfg.lookup("min_read_length");
+      MIN_READ_LENGTH = atoi(cfg.lookup("min_read_length").c_str());
     }
 
     port = cfg.lookup("port").c_str();

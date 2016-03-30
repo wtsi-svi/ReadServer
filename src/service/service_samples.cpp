@@ -164,16 +164,16 @@ int main (int argc, char **argv) {
   try
   {
     if ( cfg.exists("sizeofSample") ) {
-      sizeofSample = (int)cfg.lookup("sizeofSample");
+      sizeofSample = atoi(cfg.lookup("sizeofSample").c_str());
     }
     if ( cfg.exists("hasOtherMetaData") ) {
-      hasOtherMetaData = (bool)cfg.lookup("hasOtherMetaData");
+      hasOtherMetaData = (string(cfg.lookup("hasOtherMetaData").c_str()) == "1");
     }
     if ( cfg.exists("max_read_length") ) {
-      MAX_READ_LENGTH = (int)cfg.lookup("max_read_length");
+      MAX_READ_LENGTH = atoi(cfg.lookup("max_read_length").c_str());
     }
     if ( cfg.exists("min_read_length") ) {
-      MIN_READ_LENGTH = (int)cfg.lookup("min_read_length");
+      MIN_READ_LENGTH = atoi(cfg.lookup("min_read_length").c_str());
     }
 
     hashfile = cfg.lookup("hashfile").c_str();
