@@ -15,7 +15,7 @@ using namespace std;
 using namespace rocksdb;
 
 int main (int argc, char **argv) {
-  if ( argc < 3 ) {
+  if ( argc < 4 ) {
     cerr << "Require more arguments for load_data_into_rocksdb." << endl;
     return EXIT_FAILURE;
   }
@@ -36,12 +36,16 @@ int main (int argc, char **argv) {
   size_t count = 0;
   WriteBatch batch;
 
+  const string suffix(argv[3]);
   ifstream ireads(argv[1], ios::in);
   string ids;
   string read;
 
-
   while ( getline(ireads, read) && getline(ireads, ids)) {
+    if ( suffix != string(read.rbegin(), read.rbegin()+3) ) {
+      continue;
+    }
+
     if ( count < BUFFER_SIZE ) {
       batch.Put(read, ids);
       ++count;

@@ -112,6 +112,11 @@ $SOURCE_DIR/../libs/bin/index_rlebwt final.bwt
 cd ..
 
 # Load the reads (key) and ids (value) into RocksDB
-rm -rf rocksdb
-mkdir rocksdb
-$SOURCE_DIR/../libs/bin/load_data_into_rocksdb fastq/merged.rlosorted.reads rocksdb
+rm -rf rocksdbs
+mkdir rocksdbs
+while read permutation
+do
+    echo "$SOURCE_DIR/../libs/bin/load_data_into_rocksdb fastq/merged.rlosorted.reads rocksdbs/${permutation}.rocksdb ${permutation}" >> tmp.commands
+done < $SOURCE_DIR/permutations-3.txt
+cat tmp.commands | perl $SOURCE_DIR/../scripts/parallel_run.pl --threads 8
+rm -f tmp.commands
