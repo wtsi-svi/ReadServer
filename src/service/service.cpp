@@ -340,8 +340,11 @@ public:
         rocksdb::Options options;
         rocksdb::Status status = rocksdb::DB::OpenForReadOnly(options, db_path, &dbptr);
         if ( !(status.ok()) ) {
-          std::cout << status.ToString() << std::endl;
+          std::cout << status.ToString() << ": " << db_path << std::endl;
           assert(status.ok());
+        }
+        else {
+          std::cout << "Opened: " << db_path << std::endl;
         }
 
         const shared_ptr<rocksdb::DB> sdb(dbptr);
@@ -817,8 +820,7 @@ public:
       shared_ptr<rocksdb::DB> sdb = (*dbs)[string(it->rbegin(), it->rbegin()+3)];
       rocksdb::Status status = sdb->Get(rocksdb::ReadOptions(), *it, &value);
       if ( !(status.ok()) ) {
-        std::cout << status.ToString() << std::endl;
-        assert(status.ok());
+        std::cout << status.ToString() << ": " << *it << std::endl;
       }
       
       if ( result != results->end() ) {
@@ -950,8 +952,7 @@ public:
           shared_ptr<rocksdb::DB> sdb = (*dbs)[string(it->rbegin(), it->rbegin()+3)];
           rocksdb::Status status = sdb->Get(rocksdb::ReadOptions(), *it, &value);
           if ( !(status.ok()) ) {
-            std::cout << status.ToString() << std::endl;
-            assert(status.ok());
+            std::cout << status.ToString() << ": " << *it << std::endl;
           }
 
           (*result)->set_r(*it);
@@ -1171,8 +1172,7 @@ public:
           shared_ptr<rocksdb::DB> sdb = (*dbs)[string(it->rbegin(), it->rbegin()+3)];
           rocksdb::Status status = sdb->Get(rocksdb::ReadOptions(), *it, &value);
           if ( !(status.ok()) ) {
-            std::cout << status.ToString() << std::endl;
-            assert(status.ok());
+            std::cout << status.ToString() << ": " << *it << std::endl;
           }
 
           (*result)->set_r(*it);
@@ -1325,8 +1325,7 @@ public:
           shared_ptr<rocksdb::DB> sdb = (*dbs)[string(it->rbegin(), it->rbegin()+3)];
           rocksdb::Status status = sdb->Get(rocksdb::ReadOptions(), *it, &value);
           if ( !(status.ok()) ) {
-            std::cout << status.ToString() << std::endl;
-            assert(status.ok());
+            std::cout << status.ToString() << ": " << *it << std::endl;
           }
           
           (*result)->set_r(*it);
@@ -1461,8 +1460,11 @@ int main (int argc, char **argv) {
           rocksdb::Options options;
           rocksdb::Status status = rocksdb::DB::OpenForReadOnly(options, db_path, &dbptr);
           if ( !(status.ok()) ) {
-            std::cout << status.ToString() << std::endl;
+            std::cout << status.ToString() << ": " << db_path << std::endl;
             assert(status.ok());
+          }
+          else {
+            std::cout << "Opened: " << db_path << std::endl;
           }
           return dbptr;
         }, db_path ) );

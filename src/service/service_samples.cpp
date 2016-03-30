@@ -50,8 +50,11 @@ public:
         rocksdb::Options options;
         rocksdb::Status status = rocksdb::DB::OpenForReadOnly(options, db_path, &dbptr);
         if ( !(status.ok()) ) {
-          std::cout << status.ToString() << std::endl;
+          std::cout << status.ToString() << ": " << db_path << std::endl;
           assert(status.ok());
+        }
+        else {
+          std::cout << "Opened: " << db_path << std::endl;
         }
 
         const shared_ptr<rocksdb::DB> sdb(dbptr);
@@ -88,8 +91,7 @@ public:
     string value;
     rocksdb::Status status = db->second->Get(rocksdb::ReadOptions(), query, &value);
     if ( !(status.ok()) ) {
-      std::cout << status.ToString() << std::endl;
-      assert(status.ok());
+      std::cout << status.ToString() << ": " << query << std::endl;
     }
 
     Reply r = Reply();
@@ -209,8 +211,11 @@ int main (int argc, char **argv) {
           rocksdb::Options options;
           rocksdb::Status status = rocksdb::DB::OpenForReadOnly(options, db_path, &dbptr);
           if ( !(status.ok()) ) {
-            std::cout << status.ToString() << std::endl;
+            std::cout << status.ToString() << ": " << db_path << std::endl;
             assert(status.ok());
+          }
+          else {
+            std::cout << "Opened: " << db_path << std::endl;
           }
           return dbptr;
         }, db_path ) );
