@@ -277,9 +277,11 @@ int main (int argc, char **argv) {
       cerr << "failed to receive" << endl;
     }
 
+    zmq::message_t newmsg(reinterpret_cast<void*>(reinterpret_cast<char*>(message.data())+4), message.size()-4);
+
     // Create Request object from message
     Request w;
-    w.ParseFromArray((static_cast<char*>(message.data()))+4, message.size()-4);
+    w.ParseFromArray(newmsg.data(), newmsg.size());
 
     const string& query = w.q();
 

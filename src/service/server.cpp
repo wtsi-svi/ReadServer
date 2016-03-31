@@ -603,8 +603,10 @@ int handle_get ( struct mg_connection *conn ) {
       else {
         string msg(query.rbegin(), query.rbegin()+3);
         msg.append(" ");
-        msg.append(static_cast<char*>(message.data()), message.size());
-        zmq::message_t newmsg(const_cast<void*>(reinterpret_cast<const void*>(msg.c_str())), msg.size(), NULL, NULL);
+
+        zmq::message_t newmsg(message.size() + msg.size());
+        memcpy(newmsg.data(), msg.c_str(), msg.size());
+        memcpy(reinterpret_cast<void*>(reinterpret_cast<char*>(newmsg.data())+msg.size()), message.data(), message.size());
 
         if ( !(sender_samples.send(newmsg)) ) {
             cerr << "failed to send message for " << query << endl;
