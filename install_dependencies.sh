@@ -118,6 +118,7 @@ then
 	init_submodules
 	cd submodules/snappy # ReadServer/submodules/snappy
 fi
+./autogen.sh
 ./configure --prefix=$LIB_DIR && make && make install
 cd .. # ReadServer/submodules 
 
