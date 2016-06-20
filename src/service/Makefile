@@ -2,7 +2,7 @@ CXX = g++
 
 CXXFLAGS = -Wall -Wextra -std=c++11
 
-LDLIBS = ../../libs/lib/libzmq.a -lrt ../../libs/lib/libconfig++.a ../../libs/lib/libprotobuf.a
+LDLIBS = ../../libs/lib/libzmq.a -lrt ../../libs/lib/libconfig++.a ../../libs/lib/libprotobuf.a ../../libs/lib/libsnappy.a
 
 
 SERVICE_INCLUDE_DIR = -I../../include/service -I../../libs/include -I../../include/bwt -I../../submodules/rocksdb/include

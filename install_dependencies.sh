@@ -112,6 +112,15 @@ fi
 ./configure --prefix=$LIB_DIR && make && make install
 cd .. # ReadServer/submodules 
 
+cd snappy # ReadServer/submodules/snappy
+if [ ! -e "snappy.h" ]
+then
+	init_submodules
+	cd submodules/snappy # ReadServer/submodules/snappy
+fi
+./configure --prefix=$LIB_DIR && make && make install
+cd .. # ReadServer/submodules 
+
 cd rocksdb # ReadServer/submodules/rocksdb
 if [ ! -d db ]
 then

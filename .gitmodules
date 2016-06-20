@@ -29,3 +29,6 @@
 [submodule "submodules/libconfig"]
 	path = submodules/libconfig
 	url = git://github.com/Zhicheng-Liu/libconfig.git
+[submodule "submodules/snappy"]
+	path = submodules/snappy
+	url = https://github.com/google/snappy
