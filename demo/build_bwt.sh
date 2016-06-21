@@ -3,15 +3,16 @@
 set -e
 
 
-####################################################################################################################
+############################################################################################################################################################################################################################################
 #	ONLY MAKE CHANGES HERE, DO NOT ALTER OTHER PARTS OF THE SCRIPT
-####################################################################################################################
+############################################################################################################################################################################################################################################
 
-	INST_SRC_DIR="<path>"	# Replace by absolute path to 'ReadServer' project directory created by 'git'(e.g. "/usr/local/ReadServer")
-	INST_CLEANUP=1		# Control variable: "INST_CLEANUP"=="1" => script will deleted previous step once the next one is completed; "INST_CLEANUP"=="0" => script won't (this will lead to a large amount of data [~100GB] accumulating in the destination directory)
+	INST_SRC_DIR="<path>"	# Replace by absolute path to 'ReadServer' project directory created by 'git' (e.g. "/usr/local/ReadServer")
+	INST_CLEANUP=1		# Control variable: "INST_CLEANUP"=="1" => script will delete the previous step once the next one is completed; "INST_CLEANUP"=="0" => script won't (this will lead to a large amount of data accumulating in the destination directory)
 	INST_PTHREADS=1		# Number of parallel threads during most of the data processing steps. Should be between: (1*no.Cores) <= THREADS <= (2*no.Cores)
+	INST_SMP=10			# Number of samples for which to build the ReadServer. Anything up to 50 should work. Two samples will finish roughly within 1hr using a single thread and lustre disks.
 
-####################################################################################################################
+############################################################################################################################################################################################################################################
 
 
 

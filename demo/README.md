@@ -20,16 +20,16 @@ cd .. && bash install_dependencies.sh && make clean && make && make install
 
 ### Data processing
 
-  - Change the "INST_SRC_DIR" variable in the top section of "build_bwt.sh" to the absolute path for the ReadServer repository
+  - Change the **_INST_SRC_DIR_** variable in the top section of **'build_bwt.sh'** to the absolute path for the ReadServer repository _(e.g. '/usr/local/ReadServer')_
 
-  - Build the BWT string and RocksDB.
+  - Build the BWT string and RocksDB with:
     ```sh
-    bash build_bwt.sh
+    bash build_bwt.sh <start_step>-<end_step> <destination_directory>
     ```
 
 ### Starting server
 
-  - Change to the "SERVER" folder within the destination directory specified during the build process
+  - Change to the _'SERVER'_ folder within the destination directory specified during the build process
 
   - Start the server.
     ```sh
