@@ -37,7 +37,7 @@ Before trying to build a ReadServer for the demo dataset, make sure that you com
     bash ../build_bwt.sh 1-10 .
     ```
     
-    This will build the server in _"<path_to_read_server_repository>/demo/DemoServer/SERVER"_.<br>Once the script has finished and the server is built run
+    This will build the server in _'DemoServer/SERVER'_. Once the script has finished and the server is built run
     
     ```sh
     bash ../build_bwt.sh 11-11 .
@@ -49,16 +49,20 @@ Before trying to build a ReadServer for the demo dataset, make sure that you com
 
 ### Starting & stopping the server
 
-  - Change to the _'SERVER'_ folder _(e.g. "<path_to_read_server_repository>/demo/DemoServer/SERVER")_ within the destination directory specified during the build process
-
+  - Change to the _'SERVER'_ folder _(e.g. 'DemoServer/SERVER')_ within the destination directory specified during the build process
+    
   - Start the server with:
+    
     ```sh
     bash start_demo_server.sh
     ```
+    
   - You can stop the server again with
+    
     ```sh
     bash exit_demo_server.sh
     ```
+    
     if necessary.
 
 <br>
