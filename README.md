@@ -22,6 +22,14 @@ export LIBRARY_PATH='/usr/local/gcc_4_9/lib:/usr/local/gcc_4_9/lib64':$LIBRARY_P
 
 <br>
 
+---
+> **NOTE:**
+> <br>
+> _In case you are planning to compile and run the project in a HPC/Farm/Cluster environment, make sure that you compile on a system with the **minimum consensus resource set** that is available on **ALL** nodes in your computing environment! Some components in this project _(e.g. 'RocksDB')_ optimise themselves for the hardware found on the machine they are compiled on. For instance, if the compiling system has **_SSE 4.2_** instruction set the final project will only run on machines with that instruction set._
+---
+
+<br>
+
 ### Installation
 ---
 
