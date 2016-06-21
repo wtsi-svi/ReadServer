@@ -19,6 +19,10 @@ then
     cd ..
 fi
 
+
+# ReadServer repository
+REP_DIR=`pwd`
+
 cd libs # ReadServer/libs/
 LIB_DIR=`pwd`
 
@@ -145,3 +149,8 @@ cd src
 ./configure --prefix=$LIB_DIR --with-sparsehash=$LIB_DIR --with-bamtools=$BAMTOOLS_DIR
 make && make install
 cd ../.. # ReadServer/submodules
+
+
+cp ${REP_DIR}
+cat demo/build_bwt.sh | awk -v r_path=${REP_DIR} 'BEGIN{}{gsub(/INST_SRC_DIR="<path>"/,"INST_SRC_DIR=\"REPLACE_PATH\"",$0);gsub(/REPLACE_PATH/,r_path,$0);print $0}END{}' > demo/build_bwt.sh.tmp
+mv demo/build_bwt.sh.tmp demo/build_bwt.sh

@@ -1,8 +1,7 @@
 # ReadServer
-Using reference-free compressed data structures to analyse thousands of human genomes simultaneously
+Using reference-free compressed data structures to analyse thousands of human genomes simultaneously<br>**(1000 Genomes ReadServer)**
 
-**(1000 Genomes ReadServer)**
-
+<br>
 
 ### Before you start
 ---
@@ -21,6 +20,7 @@ export LD_LIBRARY_PATH='/usr/local/gcc_4_9/lib:/usr/local/gcc_4_9/lib64':$LD_LIB
 export LIBRARY_PATH='/usr/local/gcc_4_9/lib:/usr/local/gcc_4_9/lib64':$LIBRARY_PATH
 ```
 
+<br>
 
 ### Installation
 ---
@@ -39,11 +39,11 @@ make
 make install
 ```
 
-Should you encounter compilation errors when running one of these commands, add
+Should you encounter compilation errors when running **'make'**, add
 
     CC=<path_to_c++11_compatible_c_compiler_binary> CXX=<path_to_c++11_compatible_c++_compiler_binary>
 
-to the **'make'** command(s), e.g.
+to the **'make'** command, e.g.
 
 ```sh
 make CC='/usr/local/gcc_4_9/bin/gcc-4.9.1' CXX='/usr/local/gcc_4_9/bin/g++-4.9.1'
@@ -51,25 +51,6 @@ make CC='/usr/local/gcc_4_9/bin/gcc-4.9.1' CXX='/usr/local/gcc_4_9/bin/g++-4.9.1
 
  _(the paths should be identical to those set for the shell variables)_. 
 
-Once installation is finished, change to the _'demo'_ sub directory and modify the following section in **'build_bwt.sh'** script as specified:
+<br>
 
-```sh
-##################################################################################
-#	ONLY MAKE CHANGES HERE, DO NOT ALTER OTHER PARTS OF THE SCRIPT
-##################################################################################
-INST_SRC_DIR="<path>" # Replace by absolute path to 'ReadServer' project directory
-INST_CLEANUP=1        # "INST_CLEANUP"=="1" => script will delete previous steps
-                      # "INST_CLEANUP"=="0" => script won't
-INST_PTHREADS=1       # Number of parallel threads used
-INST_SMP=10           # Number of samples for which to build the ReadServer
-                      # Anything up to 50 should work.
-##################################################################################
-```
-
-You should then be able to build a demonstration ReadServer by running the script with:
-
-```sh
-bash build_bwt.sh <start_step>-<end_step> <destination_directory>
-```
-
-Running it without parameters will display the build steps available. For more information check the _'README.md'_ in the _'demo'_ directory.
+Once installation is finished, change to the _'demo'_ sub directory and follow the instructions in **'README.md'** to build a demonstration ReadServer.

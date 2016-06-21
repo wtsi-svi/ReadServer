@@ -7,10 +7,12 @@ set -e
 #	ONLY MAKE CHANGES HERE, DO NOT ALTER OTHER PARTS OF THE SCRIPT
 ############################################################################################################################################################################################################################################
 
-	INST_SRC_DIR="<path>"	# Replace by absolute path to 'ReadServer' project directory created by 'git' (e.g. "/usr/local/ReadServer")
+	INST_SRC_DIR="<path>"	# This should be set to the absolute path to 'ReadServer' project directory created by 'git' (e.g. "/usr/local/ReadServer")
+							# If it is still set to '<path>' replace it with the absolute path to the repository!
+
+	INST_SMP=10			# Number of samples for which to build the ReadServer. Anything up to 50 should work. Two samples will finish roughly within 1hr using a single thread and lustre disks.
 	INST_CLEANUP=1		# Control variable: "INST_CLEANUP"=="1" => script will delete the previous step once the next one is completed; "INST_CLEANUP"=="0" => script won't (this will lead to a large amount of data accumulating in the destination directory)
 	INST_PTHREADS=1		# Number of parallel threads during most of the data processing steps. Should be between: (1*no.Cores) <= THREADS <= (2*no.Cores)
-	INST_SMP=10			# Number of samples for which to build the ReadServer. Anything up to 50 should work. Two samples will finish roughly within 1hr using a single thread and lustre disks.
 
 ############################################################################################################################################################################################################################################
 
@@ -146,11 +148,11 @@ fi
 #- Generate sample list & hash for DemoServer sequencing read set in case they don't exist yet
 INST_SMP=2
 
-if ! [[ -e "${INST_DST}/list_of_sample_names" ]] ; then
+if ! [[ -e "${INST_DST}/list_of_sample_names" ]] && [[ "${INST_START_AT}" -ne 11 ]] ; then
 	grep "ERR360" "${INST_SRC_DIR}/demo/ng.3281-S2.csv" | awk -F ',' '{print $3}' | sort -u | head -n "${INST_SMP}" > "${INST_DST}/list_of_sample_names"
 fi
 
-if ! [[ -e "${INST_DST}/list_of_sample_hash" ]] ; then
+if ! [[ -e "${INST_DST}/list_of_sample_hash" ]] && [[ "${INST_START_AT}" -ne 11 ]] ; then
 	"${INST_BIN_DIR}/create_samples_hash" "${INST_DST}/list_of_sample_names" "${INST_DST}/list_of_sample_hash"
 fi
 #-
@@ -726,7 +728,7 @@ if [[ "${INST_START_AT}" -eq 6 ]] ; then
 		done < STEP_05/tmp.list_of_parts
 		#--
 		
-		#-- If so, delete error corrected FASTQs and tmp commands
+		#-- If so, delete split files and tmp commands
 		if [[ "${chk}" -eq 0 ]] ; then
 			rm -f STEP_05/tmp.list_of_parts
 			rm -f STEP_06/tmp.commands
@@ -847,7 +849,7 @@ if [[ "${INST_START_AT}" -eq 7 ]] ; then
 		if [[ -e "STEP_07/SOURCE/MERGED.1" ]] && [[ -s "STEP_07/SOURCE/MERGED.1" ]] ; then chk=$(( chk - 1 )); fi
 		#--
 		
-		#-- If so, delete error corrected FASTQs and tmp commands
+		#-- If so, delete RLO sorted input files and tmp commands
 		if [[ "${chk}" -eq 0 ]] ; then
 			mv STEP_07/SOURCE/MERGED.1 STEP_07/merged.rlosorted.reads
 			
@@ -939,7 +941,7 @@ if [[ "${INST_START_AT}" -eq 8 ]] ; then
 		if [[ -e "STEP_08/final.bwt.bpi2" ]] && [[ -s "STEP_08/final.bwt.bpi2" ]] ; then chk=$(( chk - 1 )); fi
 		#--
 		
-		#-- If so, delete error corrected FASTQs and tmp commands
+		#-- If so, delete the intermediate filtered FASTA file and tmp commands
 		if [[ "${chk}" -eq 0 ]] ; then
 			rm -f STEP_08/final.fa
 			
@@ -1025,9 +1027,11 @@ if [[ "${INST_START_AT}" -eq 9 ]] ; then
 		done < "${INST_SRC_DIR}/demo/permutations-3.txt"
 		#--
 		
-		#-- If so, delete error corrected FASTQs and tmp commands
+		#-- If so, delete merged read file and tmp commands
 		if [[ "${chk}" -eq 0 ]] ; then
 			rm -f STEP_09/tmp.commands
+			
+			if [[ ${INST_CLEANUP} -eq 1 ]] ; then rm -Rf STEP_07; fi
 			
 			echo -e "\n<-\tSTEP_09 finished!\n"
 		else
@@ -1113,6 +1117,11 @@ if [[ "${INST_START_AT}" -eq 10 ]] ; then
 		if [[ "${chk}" -eq 0 ]] ; then
 			rm -Rf STEP_08
 			rm -Rf STEP_09
+			
+			if [[ ${INST_CLEANUP} -eq 1 ]] ; then
+				rm -Rf list_of_sample_names
+				rm -Rf list_of_sample_hash
+			fi
 			
 			echo -e "\n<-\tSTEP_10 finished!\n"
 		else
