@@ -1,6 +1,6 @@
 # ReadServer demo
 
-This is an example for demonstrating how to build a ReadServer.
+This is an example for demonstrating how to build a population BWT ReadServer.
 
 <br>
 The test dataset is taken from the following paper:
@@ -13,7 +13,7 @@ The public accession numbers for the lanes are in here: [XLSX](http://www.nature
 
 ### Installation
 
-Before trying to build a ReadServer for the demo dataset, make sure that you compiled and installed the project. Check the **'README.md'** in the main project directory for instructions.
+Before trying to build a BWT ReadServer for the demo dataset, make sure that you compiled and installed the project. Check the **'README.md'** in the main project directory for instructions.
 
 <br>
 
