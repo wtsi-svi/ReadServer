@@ -1,5 +1,7 @@
 # ReadServer
-Using reference-free compressed data structures to analyse thousands of human genomes simultaneously<br>**(1000 Genomes ReadServer)**
+Using reference-free compressed data structures to analyse thousands of human genomes simultaneously<br>
+
+For more details, please see our manuscript.
 
 <br>
 
@@ -59,4 +61,4 @@ make CC='/usr/local/gcc_4_9/bin/gcc-4.9.1' CXX='/usr/local/gcc_4_9/bin/g++-4.9.1
 
 <br>
 
-Once installation is finished, change to the _'demo'_ sub directory and follow the instructions in **'README.md'** to build a demonstration ReadServer.
+Once installation is finished, change to the _'demo'_ sub directory and follow the instructions in **'README.md'** to build a demonstration population BWT ReadServer.
