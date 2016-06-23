@@ -1,7 +1,7 @@
 # ReadServer
 Using reference-free compressed data structures to analyse thousands of human genomes simultaneously<br>
 
-For more details, please see our manuscript.
+For more details, please see our [manuscript](http://biorxiv.org/content/early/2016/06/22/060186 "http://biorxiv.org/content/early/2016/06/22/060186").
 
 <br>
 
