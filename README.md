@@ -8,7 +8,21 @@ For more details, please see our manuscript.
 ### Before you start
 ---
 
-This project includes most of its requirements as **git** submodules. However, many of the modules, as well as the main project itself, require a _C++11_ compatible compiler (GCC versions from **4.8.1** onwards should work). If you install this software on a system that has an incompatible version set as default compiler, make sure to set the **_CC_** and **_CXX_** shell variables to the location of the binaries of a _C++11_ compatible compiler and export them in your shell:
+This project includes most of its requirements as **git** submodules. However, many of the modules, as well as the main project itself, require a _C++11_ compatible compiler (GCC versions from **4.8.1** onwards should work). The following table contains a (non-exhaustive) list of Unix/Linux distributions and the version from which onwards they (should) have a compatible GCC version:
+
+| Distribution             | Version  | Release date (YYYY-MM-DD) | GCC   |
+|:-------------------------|:--------:|:-------------------------:|:-----:|
+| Fedora                   | 19       | 2013-07-02                | 4.8.1 |
+| Ubuntu                   | 13.10    | 2013-10-17                | 4.8.1 |
+| openSUSE                 | 13.1     | 2013-11-19                | 4.8.1 |
+| Mint                     | 16       | 2013-11-30                | 4.8.1 |
+| Debian                   | 8.0      | 2015-04-26                | 4.9.2 |
+| Red Hat Enterprise Linux | RHEL-7.2 | 2015-11-19                | 4.8.5 |
+| CentOS                   | 7-1511   | 2015-12-14                | 4.8.5 |
+| Scientific Linux         | 7.2      | 2016-02-05                | 4.8.5 |
+| FreeBSD                  | 10.3     | 2016-04-04                | 4.8.4 |
+
+If you install this software on a system that has an incompatible version set as default compiler, make sure to set the **_CC_** and **_CXX_** shell variables to the location of the binaries of a _C++11_ compatible compiler and export them in your shell:
 
 ```sh
 export CC='/usr/local/gcc_4_9/bin/gcc-4.9.1'
@@ -30,8 +44,41 @@ export LIBRARY_PATH='/usr/local/gcc_4_9/lib:/usr/local/gcc_4_9/lib64':$LIBRARY_P
 
 <br>
 
+We tested installation & compilation on a freshly set up _Ubuntu 16.04 LTS_ operating system and found the following required packages not to be included in the standard installation:
+
+* cmake
+* automake
+* libtool
+* texi2html
+* texinfo
+* docbook2x
+* zlib1g-dev
+* libbz2-dev
+
+On an Ubuntu system (or any other distribution using the **apt** package manager and compatible repositories) you can install them with:
+
+```sh
+sudo apt install cmake automake libtool texi2html texinfo docbook2x zlib1g-dev libbz2-dev
+```
+
+_(if you don't have administrator rights on your system please ask your IT for help)_
+
+<br><br>
+
 ### Installation
 ---
+
+You can get a clone of this repository by typing
+```sh
+git clone https://github.com/wtsi-svi/ReadServer
+```
+or
+```sh
+git clone git@github.com:wtsi-svi/ReadServer.git
+```
+in your commandline.
+
+<br>
 
 After you have cloned this project, change to the **git** project directory _(e.g. '/usr/local/ReadServer')_ and execute:
 
