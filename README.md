@@ -3,7 +3,8 @@ Using reference-free compressed data structures to analyse thousands of human ge
 
 For more details, please see our [manuscript](http://biorxiv.org/content/early/2016/06/22/060186 "http://biorxiv.org/content/early/2016/06/22/060186").
 
-The datasets produced by the analysis in the manuscript are available [here](ftp://ftp-mouse.sanger.ac.uk/other/tk2/1607-popBWT-material/). See the README.
+The datasets produced by the analysis in the manuscript are available:
+ftp://ftp-mouse.sanger.ac.uk/other/tk2/1607-popBWT-material/
 
 <br>
 
