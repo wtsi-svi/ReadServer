@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 message Request {
     enum RequestType { CountReads = 1; ExactMatch = 2; KmerMatch = 3; SiteMatch = 4; }
     enum ReturnType { Count = 1; Reads = 2; All = 3; Samples = 4; }
