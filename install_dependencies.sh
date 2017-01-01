@@ -150,6 +150,10 @@ cd src
 make && make install
 cd ../.. # ReadServer/submodules
 
+cd ${REP_DIR}
+cd src/service # ReadServer/src/service
+../../submodules/protobuf/src/protoc ./readserver.proto --cpp_out=.
+cd ../.. # ReadServer/
 
 cd ${REP_DIR}
 cat demo/build_bwt.sh | awk -v r_path=${REP_DIR} 'BEGIN{}{gsub(/INST_SRC_DIR="<path>"/,"INST_SRC_DIR=\"REPLACE_PATH\"",$0);gsub(/REPLACE_PATH/,r_path,$0);print $0}END{}' > demo/build_bwt.sh.tmp
