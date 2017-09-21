@@ -57,11 +57,13 @@ We tested installation & compilation on a freshly set up _Ubuntu 16.04 LTS_ oper
 * docbook2x
 * zlib1g-dev
 * libbz2-dev
+* pkg-config
+* unzip
 
 On an Ubuntu system (or any other distribution using the **apt** package manager and compatible repositories) you can install them with:
 
 ```sh
-sudo apt install cmake automake libtool texi2html texinfo docbook2x zlib1g-dev libbz2-dev
+sudo apt install cmake automake libtool texi2html texinfo docbook2x zlib1g-dev libbz2-dev pkg-config unzip
 ```
 
 _(if you don't have administrator rights on your system please ask your IT for help)_
