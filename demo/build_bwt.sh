@@ -145,7 +145,6 @@ fi
 
 
 #- Generate sample list & hash for DemoServer sequencing read set in case they don't exist yet
-INST_SMP=2
 
 if ! [[ -e "${INST_DST}/list_of_sample_names" ]] && [[ "${INST_START_AT}" -ne 11 ]] ; then
 	grep "ERR360" "${INST_SRC_DIR}/demo/ng.3281-S2.csv" | awk -F ',' '{print $3}' | sort -u | head -n "${INST_SMP}" > "${INST_DST}/list_of_sample_names"
